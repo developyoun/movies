@@ -1,13 +1,18 @@
 import { combineReducers } from "redux";
 import counter, { counterSaga } from "./counter";
-import { all } from "redux-saga/effects";
+import movies, { movieSaga } from "./movies";
+import { all, fork } from "redux-saga/effects";
 
 const rootReducer = combineReducers({
 	counter,
+  movies
 });
 
 export function* rootSaga(){
-  yield all([counterSaga()])
+  yield all([
+      fork(counterSaga),
+      fork(movieSaga),
+  ])
 }
 
 export default rootReducer;
