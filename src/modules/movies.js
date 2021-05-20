@@ -33,7 +33,7 @@ const requestMovieAPI = () => {
   })
 }
 
-function* getMovieSaga(action){
+function* getMovieSaga(){
   try{
     const { data } = yield call(requestMovieAPI)
     yield put(successMovies(data.results))
@@ -41,6 +41,7 @@ function* getMovieSaga(action){
     yield put(failureMovies(e))
   }
 }
+
 function* watchMovieSaga(){
   yield takeEvery(REQUEST_MOVIES, getMovieSaga)
 }
@@ -49,14 +50,30 @@ export function* movieSaga(){
   yield all([fork(watchMovieSaga)]);
 }
 
-const movies = (state=[], action) => {
+const initialState = {
+  isLoading: false,
+  data: []
+}
+
+const movies = (state=initialState, action) => {
   switch(action.type){
     case REQUEST_MOVIES:
-      return state.concat(true)
+      return {
+        ...state,
+        isLoading: true,
+      }
     case SUCCESS_MOVIES:
-      return [...action.payload]
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+      }
     case FAILURE_MOVIES:
-      return action.payload
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+      }
     default:
       return state 
   }

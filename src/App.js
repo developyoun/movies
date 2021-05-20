@@ -1,27 +1,15 @@
-import { useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-	requestMovies,
-	successMovies,
-	failureMovies,
-} from "./modules/movies"
+import HomeMovies from "./component/movies/HomeMovies";
+import styled from "styled-components";
 
-function App() {
-	const movies = useSelector((state) => state.movies);
-	const dispatch = useDispatch();
+const AppContainer = styled.div`
+`;
+
+const App = () => {
 	
-	const requestMovieApi = useCallback(() => {
-		dispatch(requestMovies())
-	}, [dispatch])
-
-	useEffect(() => {
-		requestMovieApi()
-	}, [])
-
 	return (
-		<div>
-			
-		</div>
+		<AppContainer>
+			<HomeMovies />
+		</AppContainer>
 	);
 }
 
