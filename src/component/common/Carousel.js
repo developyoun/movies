@@ -1,9 +1,10 @@
 import { useState } from "react"
 import Slider from "react-slick";
+import MovieModal from "./MovieModal";
 
-import { Modal } from "react-bootstrap";
 import {ImArrowRight, ImArrowLeft} from "react-icons/im" 
 import styled from "styled-components";
+const IMAGE_PATH = 'https://image.tmdb.org/t/p/w300';
 
 const CustomSlider = styled(Slider)`
   .slick-slide {
@@ -15,13 +16,14 @@ const CustomSlider = styled(Slider)`
 `;
 
 const Image = styled.img`
-  width: 14vw;
+  width: 17.5vw;
   object-fit: contain;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
+  border-radius: 7px;
   &:hover{
     transition: all 0.5s 0.5s;
-    transform: scale(1.25);
+    transform: scale(1.4);
   }
 `;
 const RightArrow = styled(ImArrowRight)`
@@ -43,32 +45,7 @@ const LeftArrow = styled(ImArrowLeft)`
 const CustomNextArrow = ({onClick}) => (<RightArrow onClick={onClick} />)
 const CustomPrevArrow = ({onClick}) => (<LeftArrow onClick={onClick} />)
 
-
-function MyVerticallyCenteredModal({show, modalClose, movie}) {
-  console.log(movie)
-  return (
-    <Modal
-      show
-      onHide={modalClose}
-      size="lg"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          {movie.title}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-
-      </Modal.Body>
-    </Modal>
-  );
-}
-
-
-
 const Carousel = ({items}) => {
-  const posterPath = 'https://image.tmdb.org/t/p/w300';
   const [show, setShow] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
@@ -76,8 +53,8 @@ const Carousel = ({items}) => {
   const modalOpen = () => setShow(true);
 
   const config = {
-    slidesToShow: 6,
-    slidesToScroll: 3,
+    slidesToShow: 5,
+    slidesToScroll: 2,
     infinite: false,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
@@ -89,7 +66,7 @@ const Carousel = ({items}) => {
         {items.map((item, index) => 
           <div key={index} >
             <Image 
-              src={`${posterPath}${item.poster_path}`} 
+              src={`${IMAGE_PATH}${item.backdrop_path}`} 
               name={item.id} 
               onClick={() => {modalOpen(); setSelectedMovie(item);}}
             />
@@ -97,7 +74,7 @@ const Carousel = ({items}) => {
         )}
       </CustomSlider>
 
-      {show && <MyVerticallyCenteredModal
+      {show && <MovieModal
         movie={selectedMovie}
         show={show}
         modalClose={modalClose}
