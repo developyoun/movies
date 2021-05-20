@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { requestMovies } from "../../modules/movies"
 import Loading from "../common/Loading";
 
+import HomeMovies from "./container/HomeMovies";
+
 import styled from "styled-components";
 
-const Container = styled.div``;
+const Container = styled.div`
+`;
 
-const HomeMovies = () => {
+const Home = () => {
   const movies = useSelector((state) => state.movies);
 	const dispatch = useDispatch();
 	
@@ -19,12 +22,13 @@ const HomeMovies = () => {
 		requestMovieApi()
 	}, [])
 
-  return <Container>
-    {
-      movies.isLoading ? 
+  return (
+    <Container>
+      {movies.isLoading ? 
         <Loading /> :
-        null
-    }
+        <HomeMovies movies={movies.data}/>
+      }
   </Container>
-}
-export default HomeMovies;
+  );
+};
+export default Home;

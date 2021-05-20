@@ -9,6 +9,9 @@ import logger from "redux-logger";
 import { Provider } from "react-redux";
 import rootReducer, { rootSaga } from "./modules";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import { StylesProvider } from "@material-ui/core";
 
 const sagaMiddleware = createSagaMiddleware();
@@ -22,12 +25,12 @@ const store = createStore(rootReducer, enhance);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<Provider store={store}>
 			<StylesProvider injectFirst>
 				<App />
 			</StylesProvider>
-		</Provider>
-	</React.StrictMode>,
+		</Provider>,
+	// </React.StrictMode>,
 	document.getElementById("root")
 );
