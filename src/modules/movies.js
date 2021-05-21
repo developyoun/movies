@@ -16,7 +16,7 @@ export const requestMovies = params => ({
 
 export const successMovies = movies => ({
   type: SUCCESS_MOVIES,
-  payload: movies,
+  payload: {...movies},
 })
 
 export const failureMovies = error => ({
@@ -25,7 +25,6 @@ export const failureMovies = error => ({
 })
 
 const requestMovieAPI = (pageNumber) => {
-  console.log(pageNumber)
   return axios.get(URL, {
     params:{
       api_key: API_KEY,
@@ -38,7 +37,7 @@ const requestMovieAPI = (pageNumber) => {
 function* getMovieSaga(action){
   try{
     const { data } = yield call(requestMovieAPI, action.payload)
-    yield put(successMovies(data.results))
+    yield put(successMovies({[action.payload]: {data: data.results, isLoading:false}}))
   } catch(e){
     yield put(failureMovies(e))
   }
@@ -49,32 +48,35 @@ function* watchMovieSaga(){
 }
 
 export function* movieSaga(){
-  yield all([fork(watchMovieSaga)]);
+  yield all([
+    fork(watchMovieSaga)
+  ]);
 }
 
 const initialState = {
-  isLoading: false,
-  data: []
+  isRequest: false,
+  data: {}
 }
 
 const movies = (state=initialState, action) => {
+  
   switch(action.type){
     case REQUEST_MOVIES:
       return {
         ...state,
-        isLoading: true,
+        isRequest: true,
       }
     case SUCCESS_MOVIES:
       return {
         ...state,
-        data: action.payload,
-        isLoading: false,
+        data: {...state.data, ...action.payload},
+        isRequest: false,
       }
     case FAILURE_MOVIES:
       return {
         ...state,
         data: action.payload,
-        isLoading: false,
+        isRequest: false,
       }
     default:
       return state 

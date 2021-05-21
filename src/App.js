@@ -15,23 +15,19 @@ import styled from "styled-components";
 //@media all and (max-width:479px) { /*스타일입력*/}
 
 const AppContainer = styled.div`
-	/* background-color: black;
-	width: 80vw;
-	height: 100vh; */
+	
 `;
 
 const App = () => {
-	const isPc = useMediaQuery({
-		query : "(min-width:1024px)"
-	});
-	const isTablet = useMediaQuery({
-		query : "(min-width:768px) and (max-width:1023px)"
-	});
-	const isMobile = useMediaQuery({
-		query : "(max-width:767px)"
-	});
-	
-
+	// const isPc = useMediaQuery({
+	// 	query : "(min-width:1024px)"
+	// });
+	// const isTablet = useMediaQuery({
+	// 	query : "(min-width:768px) and (max-width:1023px)"
+	// });
+	// const isMobile = useMediaQuery({
+	// 	query : "(max-width:767px)"
+	// });
 
 	return (
 		<AppContainer>

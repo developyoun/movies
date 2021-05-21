@@ -15,9 +15,8 @@ const GENRE_SET = {
   878:"SF", 10770:"TV 영화", 53:"스릴러", 10752:"전쟁", 37:"서부"
 }
 
-
 const ModalContainer = styled(Modal)`
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0,0,0,0.2);
   
   .modal-content{
     background-image: url(${props => props.backgroundimage});
@@ -41,53 +40,52 @@ const ModalContents = styled(Modal.Body)`
   padding: 0;
 `;
 const NoVideo = styled.div`
-  height: 300px;
-  line-height: 300px;
-  margin: auto 15px;
+  height: 30vh;
+  line-height: 30vh;
+  margin: auto 1.5rem;
   text-align: center;
   
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
 `;
 const ModalTitle = styled.div`
-  font-size: 2rem;
+  font-size: 2.8rem;
   font-weight: bolder;
   color: black;
-  margin: 20px 0 20px 20px;
+  margin: 2rem 0 2rem 2rem;
   `;
 const FlexDiv = styled.div`
   display: flex;
 `;
 const ModalOverview = styled.div`
-  font-size: 1.1rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  margin: 10px;
+  margin: 1rem;
 `;
 const ModalGenre = styled.span`
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 600;
   span{
-    margin-left: 20px;
+    margin-left: 0.8rem;
     text-decoration: underline;
     text-align: center;
     vertical-align: center;
   }
 `;
 const ModalRelease = styled.span`
-  margin: 0 10px;
+  margin: 0 1rem;
   font-weight: 600;
-  font-size: 1.7rem;
+  font-size: 2.4rem;
 `;
 const ModalLeft = styled.div`
   flex-basis: 50%;
 `;
 const ModalRight = styled.div`
   flex-basis: 50%;
-  margin: 12px;
+  margin: 1.2rem;
 `;
 
 const MovieModal = React.memo(({show, modalClose, movie}) => {
-  console.log(movie)
   const dispatch = useDispatch();
   const {isLoading, data} = useSelector(state => state.youtube)
 
@@ -116,26 +114,26 @@ const MovieModal = React.memo(({show, modalClose, movie}) => {
         <FlexDiv>
           <ModalLeft>
             <div style={{fontSize: "2rem", fontWeight: "bolder", margin: "10px"}}>줄거리</div>
-            <ModalOverview>{movie.overview || "등록된 줄거리가 없습니다"}</ModalOverview>
+            <ModalOverview>{movie.overview || "😓 등록된 줄거리가 없습니다"}</ModalOverview>
           </ModalLeft>
 
           <ModalRight>
-            <div style={{margin: "10px"}}>
-              <span style={{fontSize: "1.6rem", fontWeight: "bold"}}>장르:</span>
+            <div style={{margin: "1rem"}}>
+              <span style={{fontSize: "2.4rem", fontWeight: "bold"}}>장르 :</span>
               <ModalGenre>
-                {movie.genre_ids.map(genreId => <span>{GENRE_SET[genreId]}</span>)}
+                {movie.genre_ids.map((genreId, index) => <span key={index}>{GENRE_SET[genreId]}</span>)}
               </ModalGenre>
             </div>
-            <div style={{margin: "10px"}}>
-              <span style={{fontSize: "1.45rem", fontWeight: "bold"}}>개봉일: </span>
+            <div style={{margin: "1rem"}}>
+              <span style={{fontSize: "2.3rem", fontWeight: "bolder"}}>개봉일: </span>
               <ModalRelease>
                 {movie.release_date}
               </ModalRelease>
             </div>
-            <div style={{margin: "10px"}}>
-              <span style={{fontSize: "1.6rem", fontWeight: "bold"}}>평점: </span>
+            <div style={{margin: "1rem"}}>
+              <span style={{fontSize: "2.4rem", fontWeight: "bold"}}>평점: </span>
               <ModalRelease>
-                <Rating value={movie.vote_average/2} precision={0.1} readOnly/>
+                <Rating size="large" value={movie.vote_average/2} precision={0.1} readOnly/>
                 {movie.vote_average}
               </ModalRelease>
             </div>

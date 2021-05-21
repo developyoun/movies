@@ -8,7 +8,8 @@ const IMAGE_PATH = 'https://image.tmdb.org/t/p/w300';
 
 const CustomSlider = styled(Slider)`
   .slick-slide {
-    padding: 40px 0;
+    /* padding: 40px 0; */
+    padding: 4rem 0;
     div{
       outline: none;
     }
@@ -28,17 +29,17 @@ const Image = styled.img`
 `;
 const RightArrow = styled(ImArrowRight)`
   position: absolute;
-  top: 50%;
+  top: 45%;
   right: -3vw;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: #424242;
   cursor: pointer;
 `
 const LeftArrow = styled(ImArrowLeft)`
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: -3vw;
-  font-size: 24px;
+  font-size: 2.4rem;
   color: #424242;
   cursor: pointer;
 `

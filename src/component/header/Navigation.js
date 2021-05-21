@@ -4,12 +4,14 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
-  background-color: #c5cae9;
+  
 `;
 
 const NavButton = styled.div`
-  font-size: 1rem;
-  padding: 10px;
+  font-size: 2.4rem;
+  font-weight: bold;
+  padding: 1rem;
+  color: white;
 `;
 
 const Navigation = () => {
