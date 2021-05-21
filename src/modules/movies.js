@@ -9,8 +9,9 @@ const REQUEST_MOVIES = `${dir}/REQUEST_MOVIES`;
 const SUCCESS_MOVIES = `${dir}/SUCCESS_MOVIES`;
 const FAILURE_MOVIES = `${dir}/FAILURE_MOVIES`;
 
-export const requestMovies = () => ({
+export const requestMovies = params => ({
   type: REQUEST_MOVIES,
+  payload: params,
 })
 
 export const successMovies = movies => ({
