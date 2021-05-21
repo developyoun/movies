@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const NavButton = styled.div`
-  font-size: 24px;
+  font-size: 1rem;
   padding: 10px;
 `;
 

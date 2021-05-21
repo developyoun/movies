@@ -24,19 +24,20 @@ export const failureMovies = error => ({
   payload: error,
 })
 
-const requestMovieAPI = () => {
+const requestMovieAPI = (pageNumber) => {
+  console.log(pageNumber)
   return axios.get(URL, {
     params:{
       api_key: API_KEY,
       language:'ko-kr',
-      page: 1,
+      page: pageNumber,
     }
   })
 }
 
-function* getMovieSaga(){
+function* getMovieSaga(action){
   try{
-    const { data } = yield call(requestMovieAPI)
+    const { data } = yield call(requestMovieAPI, action.payload)
     yield put(successMovies(data.results))
   } catch(e){
     yield put(failureMovies(e))

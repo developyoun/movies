@@ -15,7 +15,7 @@ const Home = () => {
 	const dispatch = useDispatch();
 	
 	const requestMovieApi = useCallback(() => {
-		dispatch(requestMovies())
+		dispatch(requestMovies(1))
 	}, [dispatch])
 
 	useEffect(() => {
