@@ -38,6 +38,7 @@ const YoutubeFrame = styled(YouTube)`
 const ModalContents = styled(Modal.Body)`
   background-color: rgba(255,255,255, 0.6);
   padding: 0;
+  color: black;
 `;
 const NoVideo = styled.div`
   height: 30vh;
@@ -63,7 +64,7 @@ const ModalOverview = styled.div`
   margin: 1rem;
 `;
 const ModalGenre = styled.span`
-  font-size: 1.8rem;
+  font-size: 2.8rem;
   font-weight: 600;
   span{
     margin-left: 0.8rem;
@@ -90,15 +91,17 @@ const MovieModal = React.memo(({show, modalClose, movie}) => {
   const {isLoading, data} = useSelector(state => state.youtube)
 
   const getVideoUrl = useCallback(() => dispatch(requestYoutube(movie.id)), [dispatch, movie.id])
+  
   useEffect(() => {
     getVideoUrl()
-  }, [])
+  }, [getVideoUrl])
 
   return (
     <ModalContainer
       show={show}
       onHide={modalClose}
       size="lg"
+      scrollable
       backgroundimage={`${IMAGE_PATH}${movie.poster_path}`}
       >
       <ModalContents>        
@@ -133,7 +136,7 @@ const MovieModal = React.memo(({show, modalClose, movie}) => {
             <div style={{margin: "1rem"}}>
               <span style={{fontSize: "2.4rem", fontWeight: "bold"}}>평점: </span>
               <ModalRelease>
-                <Rating size="large" value={movie.vote_average/2} precision={0.1} readOnly/>
+                <Rating style={{fontSize:"8rem"}} value={movie.vote_average/2} precision={0.01} readOnly/>{"  "}
                 {movie.vote_average}
               </ModalRelease>
             </div>

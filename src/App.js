@@ -1,9 +1,32 @@
 import { useMediaQuery } from "react-responsive";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
-import Home from "./component/home/Home";
+import Home from "./component/main/Home";
 import Navigation from "./component/header/Navigation";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
+const GlobalStyle = createGlobalStyle`
+	*{
+		/* font-size: 62.5%; */
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+
+		@media all and (min-width:1024px){
+			font-size: 62.5%;
+		};
+		@media all and (min-width:768px) and (max-width:1023px){
+			font-size: 55%;
+		};
+		@media all and (max-width:767px){
+			font-size: 40%;
+		};
+	}
+	body{
+		color: white;
+		background-color: #111;
+	}
+`;
 
 /* PC , 테블릿 가로 (해상도 768px ~ 1023px)*/ 
 //@media all and (min-width:768px) and (max-width:1023px) { /*스타일입력*/} 
@@ -14,29 +37,32 @@ import styled from "styled-components";
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/ 
 //@media all and (max-width:479px) { /*스타일입력*/}
 
-const AppContainer = styled.div`
-	
-`;
+const AppContainer = styled.div``;
 
 const App = () => {
-	// const isPc = useMediaQuery({
-	// 	query : "(min-width:1024px)"
-	// });
-	// const isTablet = useMediaQuery({
-	// 	query : "(min-width:768px) and (max-width:1023px)"
-	// });
-	// const isMobile = useMediaQuery({
-	// 	query : "(max-width:767px)"
-	// });
+	const isPc = useMediaQuery({
+		query : "(min-width:1024px)"
+	});
+	const isTablet = useMediaQuery({
+		query : "(min-width:768px) and (max-width:1023px)"
+	});
+	const isMobile = useMediaQuery({
+		query : "(max-width:767px)"
+	});
 
 	return (
-		<AppContainer>
-			<Navigation />
-			<Home />
-			{/* {isPc && <div>PC</div>}
-			{isTablet && <div>Tablet</div>}
-			{isMobile && <div>Mobile</div>} */}
-		</AppContainer>
+		<BrowserRouter>
+			<GlobalStyle />
+			<AppContainer>
+				<Navigation />
+				<Switch>
+					<Route exact path="/" component={Home} />
+				</Switch>
+				{isPc && <div>PC</div>}
+				{isTablet && <div>Tablet</div>}
+				{isMobile && <div>Mobile</div>}
+			</AppContainer>
+		</BrowserRouter>
 	);
 }
 

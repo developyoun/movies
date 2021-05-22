@@ -8,22 +8,23 @@ import HomeMovies from "./container/HomeMovies";
 import styled from "styled-components";
 
 const Container = styled.div`
+  margin-bottom: 10rem;
 `;
 
 const Home = () => {
   const {isRequest, data} = useSelector((state) => state.movies);
 	const dispatch = useDispatch();
 	
-	const requestMovieApi = useCallback((queryNumber) => {
-		dispatch(requestMovies(queryNumber))
+	const requestMovieApi = useCallback(() => {
+		dispatch(requestMovies(1))
+    dispatch(requestMovies(2))
+    dispatch(requestMovies(3))
+    dispatch(requestMovies(4))
 	}, [dispatch])
 
 	useEffect(() => {
-		requestMovieApi(1)
-    requestMovieApi(2)
-    requestMovieApi(3)
-    requestMovieApi(4)
-	}, [])
+		requestMovieApi()
+	}, [requestMovieApi])
 
   return (
     <Container>

@@ -26,11 +26,11 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
 	// <React.StrictMode>
-		<Provider store={store}>
-			<StylesProvider injectFirst>
-				<App />
-			</StylesProvider>
-		</Provider>,
+	<Provider store={store}>
+		<StylesProvider injectFirst>
+			<App />
+		</StylesProvider>
+	</Provider>,
 	// </React.StrictMode>,
 	document.getElementById("root")
 );
