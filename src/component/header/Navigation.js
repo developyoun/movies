@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import SearchButton from "./SearchButton";
+import SearchButton from "./SearchBar";
 
 import styled from "styled-components";
 
@@ -24,7 +24,6 @@ const NavButton = styled(NavLink)`
 const LogoButton = styled.img`
   width: 20rem;
 `;
-
 
 const Navigation = () => {
   const LOGO = `${process.env.PUBLIC_URL}/logo.png`

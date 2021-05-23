@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { requestSearch } from "modules/search";
 import useDebounce from "component/common/useDebounce";
 
 import { TextField, Grid } from "@material-ui/core";
@@ -26,14 +28,23 @@ const InputBar = styled(TextField)`
 `;
 
 const SearchButton = () => {
-  const [searchInput, setSearchInput] = useState("");
-  const debounceValue = useDebounce(searchInput, 600);
+  const dispatch = useDispatch();
+  const [inputContent, setInputContent] = useState("");
+  
+  const debounceValue = useDebounce(inputContent, 800);
+  
+  const debouncedChangeEvent = useCallback((input) => {
+    dispatch(requestSearch(input))
+  }, [dispatch])
+
 
   useEffect(() => {
-    console.log(debounceValue)
-  }, [debounceValue])
+    if (debounceValue){
+      debouncedChangeEvent(debounceValue)
+    }
+  }, [debouncedChangeEvent, debounceValue])
 
-  const onChange = e => setSearchInput(e.target.value);
+  const onChange = e => setInputContent(e.target.value);
 
   return (
     <ButtonContainer>
