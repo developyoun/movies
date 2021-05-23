@@ -17,7 +17,7 @@ const CustomSlider = styled(Slider)`
 
 const Image = styled.img`
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: all 0.1s ease-in-out;
   cursor: pointer;
   border-radius: 7px;
@@ -26,6 +26,7 @@ const Image = styled.img`
     transform: scale(1.4);
   }
 `;
+
 const RightArrow = styled(CgArrowRightO)`
   position: absolute;
   top: 45%;
@@ -85,18 +86,18 @@ const Carousel = ({items}) => {
       }
     ],
   }
-
+  
   return (
     <>
       <CustomSlider {...config}>
         {items.map((item, index) => 
-          <div key={index}>
+          item.backdrop_path && <div key={index}>
             <Image 
               src={`${IMAGE_PATH}${item.backdrop_path}`} 
               name={item.id} 
               onClick={() => {modalOpen(); setSelectedMovie(item);}}
-            />
-          </div>
+              />
+            </div>
         )}
       </CustomSlider>
 

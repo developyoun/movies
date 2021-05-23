@@ -2,7 +2,6 @@ import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { requestMovies } from "../../modules/movies"
 import Loading from "../common/Loading";
-
 import HomeMovies from "./container/HomeMovies";
 
 import styled from "styled-components";
