@@ -31,8 +31,8 @@ const InputBar = styled(TextField)`
 `;
 
 const SearchButton = () => {
-  const dispatch = useDispatch();
   const [inputContent, setInputContent] = useState("");
+  const dispatch = useDispatch();
   
   const debounceValue = useDebounce(inputContent, 800);
   
@@ -44,7 +44,7 @@ const SearchButton = () => {
   useEffect(() => {
     debouncedChangeEvent(debounceValue)
   }, [debouncedChangeEvent, debounceValue])
-
+  
   const onChange = e => setInputContent(e.target.value);
 
   return (
@@ -56,7 +56,7 @@ const SearchButton = () => {
         <Grid item>
           <InputBar 
             label="Search..."
-            autoFocus
+            value={inputContent}
             color="secondary"
             InputLabelProps={{
               style:{

@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SearchButton from "./SearchBar";
 
+import { requestSearch } from "modules/search"
+
 import styled from "styled-components";
+import { useCallback } from "react";
 
 const Container = styled.div`
   position: sticky;
@@ -28,10 +32,15 @@ const LogoButton = styled.img`
 
 const Navigation = () => {
   const LOGO = `${process.env.PUBLIC_URL}/logo.png`
+  const dispatch = useDispatch();
+
+  const onClick = useCallback(() => {
+    dispatch(requestSearch(""))
+  }, [dispatch])
 
 	return(
     <Container>
-      <NavButton to="/"><LogoButton src={LOGO} alt="logo" /></NavButton>
+      <NavButton onClick={onClick} to="/"><LogoButton src={LOGO} alt="logo" /></NavButton>
       <NavButton to="/">Category</NavButton>
       <NavButton to="/1">Community</NavButton>
       <NavButton to="/2">INFO</NavButton>
