@@ -33,11 +33,13 @@ const requestSearchApi = (inputValue) => {
 }
 
 function* requestSearchSaga(action){
-  try{
-    const { data } = yield call(requestSearchApi, action.payload);
-    yield put(successSearch(data.results))
-  } catch(e){
-    yield put(failureSearch(e))
+  if (action.payload){
+    try{
+      const { data } = yield call(requestSearchApi, action.payload);
+      yield put(successSearch(data.results))
+    } catch(e){
+      yield put(failureSearch(e))
+    }
   }
 }
 

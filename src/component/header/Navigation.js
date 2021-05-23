@@ -20,6 +20,7 @@ const NavButton = styled(NavLink)`
   padding: 1rem;
   color: white;
   flex: 1;
+  text-align: center;
 `;
 const LogoButton = styled.img`
   width: 20rem;

@@ -11,9 +11,11 @@ const ButtonContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  
 `;
 
 const SearchButtonIcon = styled(Search)`
+  margin-right: 1rem;
   color: white;
   font-size: 3.5rem;
   &:hover{
@@ -24,6 +26,7 @@ const InputBar = styled(TextField)`
   Input{
     font-size: 1.6rem;
     color: white;
+    width: 20rem;
   };
 `;
 
@@ -39,16 +42,14 @@ const SearchButton = () => {
 
 
   useEffect(() => {
-    if (debounceValue){
-      debouncedChangeEvent(debounceValue)
-    }
+    debouncedChangeEvent(debounceValue)
   }, [debouncedChangeEvent, debounceValue])
 
   const onChange = e => setInputContent(e.target.value);
 
   return (
     <ButtonContainer>
-      <Grid container spacing={1} alignItems="flex-end">
+      <Grid container alignItems="flex-end">
         <Grid item>
           <SearchButtonIcon />
         </Grid>

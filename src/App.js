@@ -1,6 +1,8 @@
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import SearchResultComponent from "component/main/SearchResultComponent"
 import Home from "./component/main/Home";
 import Navigation from "./component/header/Navigation";
 import styled, { createGlobalStyle } from "styled-components";
@@ -50,14 +52,23 @@ const App = () => {
 		query : "(max-width:767px)"
 	});
 
+	const {searchInput, isLoading, error, data} = useSelector(state => state.search)
+
 	return (
 		<BrowserRouter>
 			<GlobalStyle />
 			<AppContainer>
 				<Navigation />
-				<Switch>
-					<Route exact path="/" component={Home} />
-				</Switch>
+				{searchInput ? 
+					<SearchResultComponent 
+						isLoading={isLoading}
+						error={error}
+						movies={data}
+					/> :
+					<Switch>
+						<Route exact path="/" component={Home} />
+					</Switch>
+				}
 				{isPc && <div>PC</div>}
 				{isTablet && <div>Tablet</div>}
 				{isMobile && <div>Mobile</div>}
