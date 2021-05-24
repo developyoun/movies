@@ -1,22 +1,28 @@
-import { takeEvery, put, call, all, fork } from "redux-saga/effects";
+import { takeEvery, put, call, all } from "redux-saga/effects";
 import axios from "axios"
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY
-const URL = process.env.REACT_APP_REQUEST_URL
 
 const dir = 'movies';
 const REQUEST_MOVIES = `${dir}/REQUEST_MOVIES`;
+
 const SUCCESS_MOVIES = `${dir}/SUCCESS_MOVIES`;
 const FAILURE_MOVIES = `${dir}/FAILURE_MOVIES`;
 
-export const requestMovies = params => ({
+export const requestMovies = (keyword, requestUrl) => ({
   type: REQUEST_MOVIES,
-  payload: params,
+  payload: {
+    name: keyword,
+    requestUrl,
+  }
 })
 
-export const successMovies = movies => ({
+export const successMovies = (name, movies) => ({
   type: SUCCESS_MOVIES,
-  payload: {...movies},
+  payload: {
+    name,
+    movies
+  },
 })
 
 export const failureMovies = error => ({
@@ -24,20 +30,20 @@ export const failureMovies = error => ({
   payload: error,
 })
 
-const requestMovieAPI = (pageNumber) => {
+const requestMovieAPI = (URL) => {
   return axios.get(URL, {
     params:{
       api_key: API_KEY,
-      language:'ko-kr',
-      page: pageNumber,
+      language:'ko-kr'
     }
   })
 }
 
 function* getMovieSaga(action){
   try{
-    const { data } = yield call(requestMovieAPI, action.payload)
-    yield put(successMovies({[action.payload]: {data: data.results, isLoading:false}}))
+    const {name, requestUrl} = action.payload
+    const { data } = yield call(requestMovieAPI, requestUrl)
+    yield put(successMovies(name, data.results))
   } catch(e){
     yield put(failureMovies(e))
   }
@@ -49,13 +55,13 @@ function* watchMovieSaga(){
 
 export function* movieSaga(){
   yield all([
-    fork(watchMovieSaga)
+    watchMovieSaga()
   ]);
 }
 
 const initialState = {
   isRequest: false,
-  data: {}
+  data: {},
 }
 
 const movies = (state=initialState, action) => {
@@ -69,7 +75,10 @@ const movies = (state=initialState, action) => {
     case SUCCESS_MOVIES:
       return {
         ...state,
-        data: {...state.data, ...action.payload},
+        data: {
+          ...state.data,
+          [action.payload.name] : action.payload.movies.filter(movie => movie.backdrop_path)
+        },
         isRequest: false,
       }
     case FAILURE_MOVIES:

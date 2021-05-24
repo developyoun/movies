@@ -1,5 +1,9 @@
-import React from "react";
-import Carousel from "../../common/Carousel"
+import React, { useEffect, useCallback} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { requestMovies } from "modules/movies"
+
+import Loading from "component/common/Loading";
+import Carousel from "component/common/Carousel"
 
 import styled from "styled-components";
 
@@ -13,12 +17,28 @@ const Title = styled.div`
 	color:white;
 `
 
-const HomeMovies =  React.memo(({ movies, title }) => {
+const HomeMovies =  React.memo(({ props, name, title }) => {
+	const URL = process.env[`REACT_APP_${props}`]
+	const movies = useSelector(state => state.movies.data[name]);
+	const dispatch = useDispatch();
+
+	const requestMovieApi = useCallback((url) => {
+		dispatch(requestMovies(name, url));
+	}, [dispatch, name])
+
+	useEffect(() => {
+		requestMovieApi(URL)
+	}, [requestMovieApi, URL])
+	
 	return (
+		<>
+		{ !movies ? <Loading /> :
 		<Container>
 			<Title>{title}</Title>
       <Carousel items={movies}/>
 		</Container>
+		}
+		</>
 	);
 });
 export default HomeMovies;

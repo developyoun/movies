@@ -8,13 +8,18 @@ const IMAGE_PATH = 'https://image.tmdb.org/t/p/w300';
 
 const CustomSlider = styled(Slider)`
   .slick-slide {
-    padding: 3.2rem 0.4rem;
+    padding: 3.2rem 0.5rem;
+    margin: 0;
     div{
       outline: none;
     }
   }
 `;
+const ImageContainer = styled.div`
+  margin: 0;
+  padding: 0;
 
+`;
 const Image = styled.img`
   width: 100%;
   object-fit: cover;
@@ -91,13 +96,14 @@ const Carousel = ({items}) => {
     <>
       <CustomSlider {...config}>
         {items.map((item, index) => 
-          item.backdrop_path && <div key={index}>
+          item.backdrop_path && 
+          <ImageContainer key={index}>
             <Image 
               src={`${IMAGE_PATH}${item.backdrop_path}`} 
               name={item.id} 
               onClick={() => {modalOpen(); setSelectedMovie(item);}}
               />
-            </div>
+            </ImageContainer>
         )}
       </CustomSlider>
 
