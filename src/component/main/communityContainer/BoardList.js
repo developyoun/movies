@@ -1,4 +1,6 @@
-import { requestDelete } from "modules/board"
+import React, { useState } from "react";
+
+import BoardModal from "./BoardModal";
 
 import { Button } from "@material-ui/core";
 import { Table } from "react-bootstrap";
@@ -28,7 +30,12 @@ const UpdateButton = styled(Button)`
   margin: 0 1rem;
 `;
 
-const BoardList = ({posts, history, deleteBoard}) => {
+const BoardList = React.memo(({posts, history, deleteBoard}) => {
+  const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState(null);
+
+  const showOn = () => setShow(true);
+  const showOff = () => setShow(false);
 
   const updateButtonClickEvent = (value) => {
     history.push({
@@ -45,7 +52,7 @@ const BoardList = ({posts, history, deleteBoard}) => {
       hover 
       responsive
       variant="dark"
-    >
+      >
       <thead>
         <RowDiv>
           <th width="28%">글 번호</th>
@@ -56,7 +63,14 @@ const BoardList = ({posts, history, deleteBoard}) => {
       </thead>
       <Tbody>
       {posts.map((post, idx) => (
-        <RowDiv key={post.id} fontsize="2.4rem">
+        <RowDiv 
+          key={post.id} 
+          fontsize="2.4rem" 
+          onClick={() => {
+            showOn()
+            setSelected(post)
+          }}>
+
           <td>{posts.length-idx}</td>
           <td>{post.title}</td>
           <td>{post.time}</td>
@@ -75,7 +89,11 @@ const BoardList = ({posts, history, deleteBoard}) => {
         </RowDiv>
       ))}
       </Tbody>
+      {show && <BoardModal 
+        post={selected}
+        showOff={showOff}
+        />}
     </Container>
   )
-}
+})
 export default BoardList;

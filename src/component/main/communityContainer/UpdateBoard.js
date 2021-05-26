@@ -2,6 +2,8 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux"
 import { requestCreate, requestUpdate } from "modules/board";
 
+import nowTime from "component/common/nowTime";
+
 import { 
   TextField,
   Button,
@@ -40,16 +42,6 @@ const TextBox = styled(TextField)`
 const SaveButton = styled(Button)`
   font-size: 3rem;
 `;
-
-const nowTime = () => {
-  const date = new Date();
-  const year=date.getFullYear(), 
-    month=date.getMonth(), 
-    day=date.getDate(), 
-    hour=date.getHours(),
-    minute=date.getMinutes();
-  return `${year}-${month+1}-${day} ${hour}시${minute}분`
-}
 
 const CreateBoard = ({history, location}) => {
   const isUpdate = (location.state ? true : false)
