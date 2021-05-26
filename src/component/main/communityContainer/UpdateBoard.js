@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux"
-import { requestCreate } from "modules/board";
+import { useDispatch } from "react-redux"
+import { requestCreate, requestUpdate } from "modules/board";
 
 import { 
   TextField,
@@ -41,15 +41,33 @@ const SaveButton = styled(Button)`
   font-size: 3rem;
 `;
 
-const CreateBoard = ({history}) => {
+const nowTime = () => {
+  const date = new Date();
+  const year=date.getFullYear(), 
+    month=date.getMonth(), 
+    day=date.getDate(), 
+    hour=date.getHours(),
+    minute=date.getMinutes();
+  return `${year}-${month+1}-${day} ${hour}시${minute}분`
+}
+
+const CreateBoard = ({history, location}) => {
+  const isUpdate = (location.state ? true : false)
+
   const [inputs, setInputs] = useState({
-    title:"",
-    content:"",
+    title: isUpdate ? location.state.title : "",
+    content: isUpdate ? location.state.content : "",
   });
   const dispatch = useDispatch();
 
   const submitDispatch = useCallback((data) => {
-    dispatch(requestCreate({...data}))
+    console.log(data)
+    if (isUpdate){
+      dispatch(requestUpdate({...data, time:nowTime(), id:location.state.id}))
+    } else{
+      dispatch(requestCreate({...data, time:nowTime()}))
+    }
+
     history.replace('/community')
   }, [dispatch, history])
 
@@ -73,6 +91,7 @@ const CreateBoard = ({history}) => {
         InputProps={{style:{fontSize:"2rem", color:"#b0bec5"}}}
         InputLabelProps={{style: {fontSize: "1.5rem", color:"#607d8b", fontWeight:"bold"}}}
         margintop="3rem"
+        defaultValue={isUpdate ? location.state.title : ""}
         onChange={inputEvent}
       />
       <TextBox 
@@ -86,6 +105,8 @@ const CreateBoard = ({history}) => {
         multiline
         rows={15}
         margintop="1.5rem"
+        onChange={inputEvent}
+        defaultValue={inputs.content}
       />
       <SaveButton
         variant="outlined"

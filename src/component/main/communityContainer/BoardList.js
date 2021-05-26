@@ -30,11 +30,13 @@ const UpdateButton = styled(Button)`
 
 const BoardList = ({posts, history, deleteBoard}) => {
 
-
-  const updateButtonClickEvent = () => {
+  const updateButtonClickEvent = (value) => {
     history.push({
       pathname: '/community/update',
-      // state: 
+      state: {
+        ...value,
+        isUpdate:true
+      }
     })
   }
 
@@ -54,25 +56,23 @@ const BoardList = ({posts, history, deleteBoard}) => {
       </thead>
       <Tbody>
       {posts.map((post, idx) => (
-        <>
-          <RowDiv fontsize="2.4rem">
-            <td>{posts.length-idx}</td>
-            <td>{post.title}</td>
-            <td>123</td>
-            <td>
-              <UpdateButton
-                variant="outlined"
-                color="primary"
-                onClick={updateButtonClickEvent}
-                >수정</UpdateButton>
-              <UpdateButton
-                variant="outlined"
-                color="secondary"
-                onClick={() => deleteBoard(post.id)}
-                >삭제</UpdateButton>
-            </td>
-          </RowDiv>
-        </>
+        <RowDiv key={post.id} fontsize="2.4rem">
+          <td>{posts.length-idx}</td>
+          <td>{post.title}</td>
+          <td>{post.time}</td>
+          <td>
+            <UpdateButton
+              variant="outlined"
+              color="primary"
+              onClick={() => updateButtonClickEvent(post)}
+              >수정</UpdateButton>
+            <UpdateButton
+              variant="outlined"
+              color="secondary"
+              onClick={() => deleteBoard(post.id)}
+              >삭제</UpdateButton>
+          </td>
+        </RowDiv>
       ))}
       </Tbody>
     </Container>

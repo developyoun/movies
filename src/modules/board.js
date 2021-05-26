@@ -1,8 +1,7 @@
-import { all, call, put, takeEvery, takeLatest, fork } from "redux-saga/effects";
+import { all, call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { dbService } from "../Firebase";
 
 // 1. 액션 타입 정의
-let id = 0;
 const dir = "boards";
 const APP_NAME = "movieApp";
 
@@ -31,7 +30,7 @@ export const requestRead = () => ({ type: REQUEST_READ });
 export const successRead = (data) => ({ type: SUCCESS_READ, payload: data });
 export const failureRead = () => ({ type: FAILURE_READ });
 
-export const requestUpdate = (content) => ({ type: REQUEST_UPDATE, payload: content});
+export const requestUpdate = (values) => ({ type: REQUEST_UPDATE, payload: values});
 export const successUpdate = (data) => ({ type: SUCCESS_UPDATE, payload: data });
 export const failureUpdate = () => ({ type: FAILURE_UPDATE });
 
@@ -52,8 +51,9 @@ function* createSaga(action) {
 }
 function* updateSaga(action) {
   try{
-    const { target, content } = action.payload;
-    yield dbService.collection(APP_NAME).doc(target).update({...content});
+		console.log(action)
+    const { id } = action.payload;
+    yield dbService.collection(APP_NAME).doc(id).update({...action.payload});
     yield put(requestRead())
   } catch(error){
     yield put(failureUpdate(error))

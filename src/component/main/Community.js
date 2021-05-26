@@ -72,7 +72,7 @@ const Community = ({ history }) => {
         /> : 
         <div>글이 하나도 없습니다 😭</div> 
       }
-			<Link to="/community/create" style={{textDecoration:"none"}}>
+			<Link to="/community/update" style={{textDecoration:"none"}}>
 				<PostButton variant="outlined" color="primary">
 					새로운 글 작성하기
 				</PostButton>
