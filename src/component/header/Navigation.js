@@ -42,7 +42,7 @@ const Navigation = () => {
     <Container>
       <NavButton onClick={onClick} to="/"><LogoButton src={LOGO} alt="logo" /></NavButton>
       <NavButton to="/">Category</NavButton>
-      <NavButton to="/1">Community</NavButton>
+      <NavButton onClick={onClick} to="/community">Community</NavButton>
       <NavButton to="/2">INFO</NavButton>
       <SearchButton />
     </Container>

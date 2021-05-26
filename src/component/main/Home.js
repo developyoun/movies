@@ -1,4 +1,4 @@
-import HomeMovies from "./container/HomeMovies";
+import HomeMovies from "./homeContainer/HomeMovies";
 
 import styled from "styled-components";
 

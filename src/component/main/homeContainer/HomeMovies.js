@@ -32,11 +32,11 @@ const HomeMovies =  React.memo(({ props, name, title }) => {
 	
 	return (
 		<>
-		{ !movies ? <Loading /> :
-		<Container>
-			<Title>{title}</Title>
-      <Carousel items={movies}/>
-		</Container>
+			{ !movies ? <Loading /> :
+			<Container>
+				<Title>{title}</Title>
+				<Carousel items={movies}/>
+			</Container>
 		}
 		</>
 	);
