@@ -1,3 +1,5 @@
+import { requestDelete } from "modules/board"
+
 import { Button } from "@material-ui/core";
 import { Table } from "react-bootstrap";
 import styled from "styled-components";
@@ -26,7 +28,16 @@ const UpdateButton = styled(Button)`
   margin: 0 1rem;
 `;
 
-const BoardList = ({posts}) => {
+const BoardList = ({posts, history, deleteBoard}) => {
+
+
+  const updateButtonClickEvent = () => {
+    history.push({
+      pathname: '/community/update',
+      // state: 
+    })
+  }
+
   return(
     <Container 
       hover 
@@ -38,7 +49,7 @@ const BoardList = ({posts}) => {
           <th width="28%">글 번호</th>
           <th width="28%">글 제목</th>
           <th width="28%">작성 시간</th>
-          <th width="28%">✍🏿</th>
+          <th>✍🏿</th>
         </RowDiv>
       </thead>
       <Tbody>
@@ -52,10 +63,12 @@ const BoardList = ({posts}) => {
               <UpdateButton
                 variant="outlined"
                 color="primary"
+                onClick={updateButtonClickEvent}
                 >수정</UpdateButton>
               <UpdateButton
                 variant="outlined"
                 color="secondary"
+                onClick={() => deleteBoard(post.id)}
                 >삭제</UpdateButton>
             </td>
           </RowDiv>

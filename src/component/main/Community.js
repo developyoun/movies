@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestRead, requestCreate } from "modules/board";
+import { requestRead, requestDelete } from "modules/board";
 import { Link } from "react-router-dom";
 
 import Loading from "component/common/Loading"
@@ -45,13 +45,16 @@ const PostButton = styled(Button)`
   right: 5vw;
 `;
 
-const Community = () => {
+const Community = ({ history }) => {
 	const { isLoading, data } = useSelector((state) => state.board);
 	const dispatch = useDispatch();
 
 	const getBoard = useCallback(() => {
 		dispatch(requestRead());
 	}, [dispatch]);
+  const deleteBoard = useCallback((id) => {
+    dispatch(requestDelete(id));
+  }, [dispatch])
 
 	useEffect(() => {
 		getBoard();
@@ -61,7 +64,13 @@ const Community = () => {
 	return (
 		<Container>
       {
-        data.length ? <BoardList posts={data}/> : <div>글이 하나도 없습니다 😭</div> 
+        data.length ? 
+        <BoardList 
+          posts={data} 
+          history={history}
+          deleteBoard={deleteBoard}
+        /> : 
+        <div>글이 하나도 없습니다 😭</div> 
       }
 			<Link to="/community/create" style={{textDecoration:"none"}}>
 				<PostButton variant="outlined" color="primary">

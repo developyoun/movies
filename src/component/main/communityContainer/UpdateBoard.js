@@ -54,7 +54,7 @@ const CreateBoard = ({history}) => {
   }, [dispatch, history])
 
   const inputEvent = e => {
-    const { name, value} = e.target;
+    const { name, value } = e.target;
     setTimeout(() => {
       setInputs({
         ...inputs,
