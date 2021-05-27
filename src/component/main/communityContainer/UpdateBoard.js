@@ -44,7 +44,7 @@ const SaveButton = styled(Button)`
 `;
 
 const CreateBoard = ({history, location}) => {
-  const isUpdate = (location.state ? true : false)
+  const isUpdate = (location.state ? location.state.id : false)
 
   const [inputs, setInputs] = useState({
     title: isUpdate ? location.state.title : "",
@@ -53,15 +53,13 @@ const CreateBoard = ({history, location}) => {
   const dispatch = useDispatch();
 
   const submitDispatch = useCallback((data) => {
-    console.log(data)
     if (isUpdate){
-      dispatch(requestUpdate({...data, time:nowTime(), id:location.state.id}))
+      dispatch(requestUpdate({...data, time:nowTime(), id:isUpdate}))
     } else{
       dispatch(requestCreate({...data, time:nowTime()}))
     }
-
     history.replace('/community')
-  }, [dispatch, history])
+  }, [dispatch, history, isUpdate])
 
   const inputEvent = e => {
     const { name, value } = e.target;

@@ -84,7 +84,7 @@ export function* boardSaga() {
     takeLatest(REQUEST_CREATE, createSaga), 
     takeLatest(REQUEST_UPDATE, updateSaga), 
     takeLatest(REQUEST_DELETE, deleteSaga), 
-    takeLatest(REQUEST_READ, readSaga),
+    takeEvery(REQUEST_READ, readSaga),
   ]);
 }
 
