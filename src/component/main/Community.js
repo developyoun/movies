@@ -52,13 +52,14 @@ const Community = ({ history }) => {
 	const getBoard = useCallback(() => {
 		dispatch(requestRead());
 	}, [dispatch]);
+
   const deleteBoard = useCallback((id) => {
     dispatch(requestDelete(id));
   }, [dispatch])
 
 	useEffect(() => {
 		getBoard();
-	}, []);
+	}, [getBoard]);
 
   if (isLoading) return <Loading />;
 	return (
