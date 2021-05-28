@@ -10,6 +10,20 @@
 - __Core__: Redux / Redux-saga / React-router / Axios / Firebase
 - __Style__: CSS / Styled-component / Material-UI / Bootstrap
 
+### 파일구조
+
+```bash
+src
+├── App.js
+├── Firebase.js
+├── index.js
+├── component	
+│	├── common	# 재사용하기 위한 components 및 function
+│	├── header	# navigation 및 search bar
+│	└── main	# 메인 화면에 그려질 components
+└── modules	# redux 및 saga 정의
+```
+
 ### 기능소개
 
 <img width="1423" alt="스크린샷 2021-05-28 오전 11 21 02" src="https://user-images.githubusercontent.com/59079426/119925208-ee1d1f00-bfaf-11eb-8211-7cdb13bee79c.png">
