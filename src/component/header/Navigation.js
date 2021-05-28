@@ -14,7 +14,7 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   top: 0;
-  z-index: 1; 
+  z-index:2; 
   background-color: #111;
 `;
 
@@ -41,7 +41,7 @@ const Navigation = () => {
 	return(
     <Container>
       <NavButton onClick={onClick} to="/"><LogoButton src={LOGO} alt="logo" /></NavButton>
-      <NavButton to="/">Category</NavButton>
+      <NavButton to="/">Collections</NavButton>
       <NavButton onClick={onClick} to="/community">Community</NavButton>
       <NavButton to="/2">INFO</NavButton>
       <SearchButton />

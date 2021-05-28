@@ -33,7 +33,6 @@ const Container = styled.div`
 const PostButton = styled(Button)`
 	font-size: 2rem;
   font-weight: bold;
-	/* color: #78909c; */
   
 	border: 0.2rem solid #303f9f;
 	:hover {

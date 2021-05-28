@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# JAOFLIX
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### { 영화 소개 웹페이지 }
 
-## Available Scripts
+### 기술스택
 
-In the project directory, you can run:
+![collage](/Users/user/Desktop/collage.png)
 
-### `npm start`
+- __Main__: JavaScript / React & hooks ( CRA )
+- __Core__: Redux / Redux-saga / React-router / Axios / Firebase
+- __Style__: CSS / Styled-component / Material-UI / Bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 기능소개
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![image-20210528112112469](/Users/user/Library/Application Support/typora-user-images/image-20210528112112469.png)
 
-### `npm test`
+- 페이지 이동이 가능하도록 `Navigation Bar` 구현하였고, fix를 통해 스크롤을 해도 유지
+-  `video tag` 를 적용하면서 동적인 화면을 구성하도록 하였음
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image-20210528112743314](/Users/user/Library/Application Support/typora-user-images/image-20210528112743314.png)
 
-### `npm run build`
+- `mouse hover` 시에 scale을 확대하는 에니메이션으로 UX기능 부여
+-  `Redux`를 사용하여 데이터를 관리하도록 하였고, `Redux-saga`를 활용하여 비동기 요청을 보내도록 함
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![image-20210528113419550](/Users/user/Library/Application Support/typora-user-images/image-20210528113419550.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- 클릭시 `Modal`을 적용하여 조금 더 편리한 UI을 보이게 하였음
+- 영화에 대한 정보를 한눈에 보여주며, youtube 트레일러 비디오를 제공
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image-20210528114139074](/Users/user/Library/Application Support/typora-user-images/image-20210528114139074.png)
 
-### `npm run eject`
+- 검색 기능이 가능하며 과도한 API 요청을 막기 위하여 `Debouncing` 적용
+- 검색 결과는 영화의 Poster를 보여주며 메인 페이지와 마찬가지로 `mouse hover` 및 `Modal` 페이지 제공
+- 또한, 어떠한 페이지에서든 검색에 대한 결과를 보여줌 (만약 키워드가 공백이라면 현재 페이지 유지)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![image-20210528114732240](/Users/user/Library/Application Support/typora-user-images/image-20210528114732240.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `Firebase`를 이용한 CRUD 기능 구현
+- `Redux-saga`를 이용하여 Firebase의 Store와 비동기요청을 수행

@@ -6,7 +6,8 @@ import SearchResultComponent from "component/main/SearchResults"
 import Home from "./component/main/Home";
 import Community from "component/main/Community"
 import Navigation from "./component/header/Navigation";
-import UpdateBoard from "component/main/communityContainer/UpdateBoard"
+import UpdateBoard from "component/main/communityContainer/UpdateBoard";
+import Info from "component/main/Info";
 
 import styled, { createGlobalStyle } from "styled-components";
 
@@ -43,12 +44,6 @@ const GlobalStyle = createGlobalStyle`
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/ 
 //@media all and (max-width:479px) { /*스타일입력*/}
 
-// dbService.collection("movieApp").get().then(data => data.forEach(doc => console.log(doc)))
-// dbService.collection("movieApp").add({name:"jaeho", weight:110}).then(res => console.log(res.data()))
-
-
-
-
 const AppContainer = styled.div``;
 
 const App = () => {
@@ -79,12 +74,12 @@ const App = () => {
 						<Route exact path="/" component={Home} />
 						<Route exact path="/community" component={Community} />
 						<Route path="/community/update" component={UpdateBoard} />
-						
+						<Route path="/info" component={Info} /> 
 					</Switch>
 				}
-				{isPc && <div>PC</div>}
+				{/* {isPc && <div>PC</div>}
 				{isTablet && <div>Tablet</div>}
-				{isMobile && <div>Mobile</div>}
+				{isMobile && <div>Mobile</div>} */}
 			</AppContainer>
 		</BrowserRouter>
 	);

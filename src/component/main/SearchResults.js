@@ -17,7 +17,7 @@ const MovieDiv = styled.div`
 	padding: 3rem;
 `;
 const MovieImage = styled.img`
-	width: 25rem;
+	width: 22rem;
 	box-shadow: 1px 1px 1px gray;
 	transition: all 0.4s ease-in-out;
 	&:hover {
