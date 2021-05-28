@@ -77,9 +77,9 @@ const App = () => {
 						<Route path="/info" component={Info} /> 
 					</Switch>
 				}
-				{isPc && <div>PC</div>}
+				{/* {isPc && <div>PC</div>}
 				{isTablet && <div>Tablet</div>}
-				{isMobile && <div>Mobile</div>}
+				{isMobile && <div>Mobile</div>} */}
 			</AppContainer>
 		</BrowserRouter>
 	);

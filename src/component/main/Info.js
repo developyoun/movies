@@ -3,11 +3,14 @@ import styled from "styled-components";
 const Container = styled.div`
 
 `;
+const Title = styled.div`
+
+`;
 
 const Info = () => {
   return (
     <Container>
-      영화추천     
+      <Title></Title>
     </Container>
   )
 }
