@@ -1,3 +1,4 @@
+import Banner from "./homeContainer/Banner";
 import HomeMovies from "./homeContainer/HomeMovies";
 
 import styled from "styled-components";
@@ -10,6 +11,7 @@ const Home = () => {
 
   return (
     <Container>
+      <Banner />
       <HomeMovies props={"NOW_PLAYING_URL"} name="nowPlay" title={"현재 상영작"}/>
       <HomeMovies props={"POPULAR_URL"} name="popular" title={"인기작"}/>
       <HomeMovies props={"TOP_RATED_URL"} name="topRated" title={"높은 평점순"}/>
